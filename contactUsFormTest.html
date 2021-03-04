@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us Form Test</title>
+
+    <script defer type="text/javascript" src="contactUsFormTest.js"></script>
+</head>
+<body>
+
+    <form id = "formContactUs" name = "contactUsForm" onsubmit ="return validateContactUsForm()" action="/contact" method = "POST">
+
+        <input type = "text" id = "firstName" maxlength = "75" name = "userFirstName" placeholder = "First Name">
+        <p id = "userFirstNameErrorMessage"></p>
+
+        <input type = "text" id = "middleName" maxlength = "75" name = "userMiddleName" placeholder = "Middle Name (Optional)">
+        <p id = "userMiddleNameErrorMessage"></p>
+
+        <input type = "text" id = "lastName" maxlength = "75" name = "userLastName" placeholder = "Last Name">
+        <p id = "userLastNameErrorMessage"></p>
+
+        <select id = "membership" name = "userMembership">
+            <option value=""disable selected hidden>Choose Your Membership</option>
+              <option value = Customer>Customer</option>
+              <option value = K-12-School>K-12 School</option>
+              <option value = College>College</option>
+              <option value = University>University</option>
+              <option value = Military-Cadets-Institution>Military Cadets Institution</option>
+              <option value = Massive_Open_Online_Institution>Massive Open Online Institution</option>
+              <option value = I_Am_Not_A_Member>I Am Not A Member</option>                           
+          </select>
+          <p id = "userMembershipErrorMessage"></p>
+
+        <input type = "email" id = "email" maxlength = "100" name = "userEmail" placeholder = "Email">
+        <p id = "userEmailErrorMessage"></p>    
+
+        <input type = "confirmEmail" id = "confirmEmail" maxlength = "100"  name = "userConfirmEmail" placeholder = "Confirm Email">
+        <p id = "userConfirmEmailErrorMessage"></p>
+
+
+        <textarea id="message" wrap="hard" rows = "3" cols = "56" spellcheck= "true" maxlength = "400" name = "userTextMessage" placeholder = "Enter Your Message Here" ></textarea>
+        <p id = "userErrorMessage"></p>
+        <p id = "remainingCount">Remaining Count <span id="countMessage" name = "countMessage"></span> out of 400 Characters</p>             
+        
+
+        <button type = "submit" >Submit</button>
+
+    </form>
+</body>
+</html>
