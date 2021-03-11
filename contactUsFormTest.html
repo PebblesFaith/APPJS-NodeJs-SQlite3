@@ -6,11 +6,365 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us Form Test</title>
 
+    <link rel="stylesheet" href="contactUsFormTest.css" media="screen" />
     <script defer type="text/javascript" src="contactUsFormTest.js"></script>
+
+    <style>
+        .float-Container01 {
+    margin: 0px; 
+}
+  
+  .rowIndex2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  
+  .columnIndex2 {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;  
+  }
+  
+  .double-column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 2;
+  }
+
+  /* Style Contact Us paragraph title header H2 number one (1).*/
+  #pH2-01 {
+    display: flex;
+    width: 70%;
+    align-items: center; 
+    justify-content: center;     
+    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;   
+    width: 85%;
+    color: rgb(180, 137, 0);
+    font-family: 'Book Antiqua', Times, serif;
+    font-size: 18px;  
+  }
+
+  /* Style Contact Us paragraph title header H2 number two (2).*/
+  #pH2-02 {
+    display: flex;    
+    width: 70%;  
+    align-items: center; 
+    justify-content: center;
+    margin-top: 10px; 
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;    
+    width: 85%;
+    color: rgb(180, 137, 0);
+    font-family: 'Book Antiqua', Times, serif;
+    font-size: 12px;
+  }
+  
+  /* Style Contact Us left-side colunn for AccouNetrics commpany address and contact information.*/
+  .left-Column {
+    background-color: rgb(180, 137, 0); 
+    height: 541px;
+    display: flex;
+    flex-direction: column;   
+
+  }
+
+ /* Style Contact Us left-side custom image AccouNetrics banner.*/ 
+.accouNetrics-FooterBanner01 {
+    display: flex;
+    width: 100%;
+    align-items: center; 
+    justify-content: center; 
+    margin-top: 125px;       
+  }
+
+  #baseLine-01 {
+    height: 1px;
+    border: none;
+    color: rgb(107, 107, 107);
+    background-color: rgb(179, 179, 179);  
+  }
+  
+  .right-Column {
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    margin: auto;  
+    padding: 0px;
+    flex-direction: column;  
+    background-color: rgb(243, 243, 243); 
+    height: 100%;
+    width: 100%;
+    background: transparent, url('/public/fred-pixlab-hZCpyda7pYs-unsplash.jpg') no-repeat top center;
+    background-size: cover;
+  }
+
+   .right-Column input {-webkit-animation-name: none;
+    padding: 2px;
+    margin: 5px 28px;
+    width: 85%;
+    background-color: rgb(179, 179, 179, 0.5);
+    color: rgb(180, 137, 0);
+    font-family: Georgia, 'Times New Roman', Times, serif;   
+    border: none;
+    outline: none;    
+    font-size: 14px;    
+  }
+
+  .contactUsForm {
+    width: 90%;
+    margin: auto;   
+  }
+
+  .userDataField {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 4%;
+    width: 100%;
+  }
+
+  .userDataField .input {   
+    margin: 10px 0;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid rgb(180, 137, 0);
+    padding: 10px;
+    color:  rgb(180, 137, 0);
+    width: 100%;
+  }
+
+  
+  #firstName, #middleName, #lastName, #userMembership {
+    margin: 5 px 0;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid  #b48900;
+    padding: 3px;
+    color: rgb(180, 137, 0);
+    width: 100%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 14px;
+    text-transform: capitalize;   
+  }
+
+  #email, #confirmEmail {
+    margin: 5 px 0;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid  #b48900;
+    padding: 3px;
+    color: rgb(180, 137, 0);
+    width: 100%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 14px;
+    text-transform: lowercase;   
+  }
+
+
+  /* Style text-transform input elements from users' values'. */
+
+  ::-webkit-input-placeholder { 
+      text-transform: none;
+  }
+  :-moz-placeholder { 
+      text-transform: none;
+  }
+  ::-moz-placeholder { 
+      text-transform: none;
+  }
+  :-ms-input-placeholder { 
+      text-transform: none;
+  }
+
+  input::placeholder {
+    color: rgb(180, 137, 0);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 14px;   
+  }  
+
+  #message {
+    resize: vertical;
+    padding: 2px;
+    margin: 5px 30px;
+    width: 100%;
+    background-color: transparent;
+    color: rgb(180, 137, 0);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border: none;
+    outline: none;    
+    font-size: 14px; 
+  }
+
+  #message::placeholder{
+    color: rgb(180, 137, 0);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 14px;
+  }
+  #message:hover {background: rgb(253, 253, 253);}
+  #message:hover {color: rgb(180, 137, 0);}
+  
+
+  .employeeName01 {
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-family: 'Book Antiqua', Times, serif;
+    font-size: 14px;
+  }
+
+a:link {
+  text-decoration: none;
+  color: rgb(255, 255, 255);  
+}
+
+a:hover {
+  background-color: rgb(179, 179, 179);
+  color: rgb(107, 107, 107);
+}
+
+#form-Index2{
+  display:grid;
+  grid-template-columns: auto auto;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other in third (3rd) icons row.*/
+@media (max-width: 600px) {
+  .columnIndex2, .form-Index2  {
+    display: block;
+    flex: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+  }
+  
+/* Assign selector button to div element for linking submitButton01 to the "Semd Message" web page. */
+#submitContactUs {
+  border: none;
+  background-color: rgb(179, 179, 179);
+  padding: 12px 24px;
+  font-family: 'Book Antiqua', Times, serif;
+  font-size: 16px;
+  text-align: center;  
+  width: 100%;
+  cursor: pointer;
+  display: inline-block; 
+  color: rgb(255, 255, 255);
+     
+}
+
+#submitContactUs:hover {background: rgb(255, 255, 255);}
+#submitContactUs:hover {color: rgb(180, 137, 0);}
+
+#form-errorAlert {
+  color: red; 
+}
+
+#form-success {
+  color: green;
+}
+
+.input-error {
+  box-shadow: 0 0 5px red;
+}
+
+#userFirstNameErrorMessage, #outputFirstNameAnalysis, #userMiddleNameErrorMessage, #outputMiddleNameAnalysis,
+#userLastNameErrorMessage, #outputLastNameAnalysis, #userMembershipErrorMessage, #outputUserMembershipAnalysis,
+#userEmailErrorMessage, #outputEmailAnalysis, #userConfirmEmailErrorMessage, #outputConfirmEmailAnalysis,
+#outputMessageAnalysis, #countMessage, #remainingCount
+{
+  background: rgb(255, 255, 255);
+  color: rgb(209, 196, 138);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 10px;    
+}
+
+#userErrorMessage {
+  background: rgb(243, 243, 243);
+  color: rgb(209, 196, 138);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 12px;    
+}
+
+#countMessage {
+  background: rgb(243, 243, 243);
+  color: rgb(209, 196, 138);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 10px;  
+}
+
+#remainingCount {
+  background: rgb(243, 243, 243);
+  color: rgb(209, 196, 138);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 10px;  
+}
+
+#footerRow {
+  margin-top: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0px 4px;
+  align-items: flex-start;
+  justify-content: space-between;
+  background-color: rgb(255, 255, 255);
+}
+
+#footerColumn > a {
+  flex: 10.2%;
+  max-width: 10.2%;
+  border: none;
+  padding: 0 4px;
+  text-align: center;
+  font-size: 11px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background: rgb(255, 255, 255);
+  color: rgb(179, 179, 179);
+}
+
+#footerColumn > a:link {
+  color:rgb(179, 179, 179);
+}
+
+#footerColumn > a:visited {
+  color:rgb(179, 179, 179);
+}
+
+#footerColumn >a:hover {
+  color:rgb(209, 196, 138);
+}
+  
+#footerColumn >a:active {
+  color:rgb(85, 73, 20);
+}
+
+  
+/* First (1st) row icons are position with top margin pixels selected to provide space between icons rows*/
+#alignment4 {
+  text-align: center;
+  margin-top: 2px;
+  margin-left: 2px;
+  margin-right: 2px;
+  margin-bottom: 2px;
+  color: rgb(180, 137, 0);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 11px;
+ 
+}
+
+    </style>
+    
 </head>
 <body>
 
-    <form id = "formContactUs" name = "contactUsForm" onsubmit ="return validateContactUsForm()" action="/contact" method = "POST">
+    <form id = "formContactUs" name = "contactUsForm" action="/contact" method = "POST">
 
         <input type = "text" id = "firstName" maxlength = "75" name = "userFirstName" placeholder = "First Name">
         <p id = "userFirstNameErrorMessage"></p>
@@ -45,7 +399,7 @@
         <p id = "remainingCount">Remaining Count <span id="countMessage" name = "countMessage"></span> out of 400 Characters</p>             
         
 
-        <button type = "submit" >Submit</button>
+        <button type = "submit" onsubmit="validateContactUsForm()">Submit</button>
 
     </form>
 </body>
