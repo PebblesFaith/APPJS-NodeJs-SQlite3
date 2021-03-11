@@ -1,10 +1,14 @@
 const express = require('express');
-
 const app = express();
+const bodyParser = require('body-parser');
 const path = require('path');
 const http = require('http');
 const port = 3000;
 const sqlite3 = require('sqlite3').verbose();
+
+app.listen(port, function() {
+    console.log('Server is listening onto ' + port + '!');
+});
 
 function validateContactUsForm() {     
 
@@ -170,7 +174,7 @@ function validateContactUsForm() {
             
     document.getElementById('countMessage').innerHTML = (length - this.value.length);
       
-};    
+    };    
       
     /* Create local storage to sets parameters for user Contact Us entries to become retrievable onto index3.js file, as a database. */
     localStorage.setItem("firstName", firstName); 
@@ -190,99 +194,111 @@ function validateContactUsForm() {
     console.log(localStorage.getItem("confirmEmail"));
     console.log(localStorage.getItem("textMessage2"));     
 
-    form.addEventListner('submit', validateContactUsForm);
-    
-    return true;     
-    
-};
-
-const bodyParser = require('body-parser');
-
-app.use(bodyParser.urlencoded({extended: true}));
-
-
-app.listen(port, function() {
-    console.log('Server is listening onto ' + port + '!');
-});
-
-
-const db = new sqlite3.Database('ContactUsFormTest.db', error => {
-    if (error) {
-        console.log('Developer created database has programmatically coded an: ' + error + '!');
-    }else{
-        console.log('Developer created database has programmatically coded successfully!');
+    form.addEventListner('submit', validateContactUsForm());        
+        return true;     
+        
     };
-});
 
-db.serialize( () => {
-    const sqlTable =  ("CREATE TABLE IF NOT EXISTS ContactUsUsers (Id INTEGER PRIMARY KEY AUTOINCREMENT, userFirstName VARCHAR(150), userMiddleName VARCHAR(150), userLastName VARCHAR(150), userMembership VARCHAR(255), userEmail VARCHAR(255), userConfirmEmail VARCHAR(255), userTextMessage TEXT)");
-    db.run(sqlTable, (error) => {
+
+    app.use(bodyParser.urlencoded({extended: true}));
+
+   
+
+
+    const db = new sqlite3.Database('ContactUsFormTest.db', error => {
         if (error) {
-            console.log('Developer created database table is not programmatically coded with an: ' + error + '!');
-        } else {
-            console.log('Developer created database table is programmatically coded successfully!');   
+            console.log('Developer created database has programmatically coded an: ' + error + '!');
+        }else{
+            console.log('Developer created database has programmatically coded successfully!');
         };
     });
-});
 
+    db.serialize( () => {
+        const sqlTable =  ("CREATE TABLE IF NOT EXISTS ContactUsUsers (Id INTEGER PRIMARY KEY AUTOINCREMENT, userFirstName VARCHAR(150), userMiddleName VARCHAR(150), userLastName VARCHAR(150), userMembership VARCHAR(255), userEmail VARCHAR(255), userConfirmEmail VARCHAR(255), userTextMessage TEXT)");
+        db.run(sqlTable, (error) => {
+            if (error) {
+                console.log('Developer created database table is not programmatically coded with an: ' + error + '!');
+            } else {
+                console.log('Developer created database table is programmatically coded successfully!');   
+            };
+        });
+    });
 
+    app.post("/contact", (req, res, next) => {
+        
+        var errors=[]
+        if (!req.body.userFirstName){
+            errors.push('No user first name specified');
+        }
+        if (!req.body.userMiddleName){
+            errors.push('No user middle name specified');
+        }
+        if (!req.body.userLastName){
+            errors.push('No user last name specified');
+        }
+        if (!req.body.userMembership){
+            errors.push('No user membership specified');
+        }
+        if (!req.body.userEmail){
+            errors.push('No user email specified');
+        }
+        if (!req.body.userConfirmEmail){
+            errors.push('No user confirm email specified');
+        }
+        if (!req.body.userTextMessage){
+            errors.push('No user text message specified');
+        }
+        if (errors.length){
+            res.status(400).json({"error":errors.join(",")});
+            return;
+        }
+        
+        var data = {
+            userFirstName: req.body.userFirstName,
+            userMiddleName: req.body.userMiddleName,
+            userLastName: req.body.userLastName,
+            userMembership: req.body.userMembership,
+            userEmail: req.body.userEmail,
+            userConfirmEmail: req.body.userConfirmEmail,
+            userTextMessage: req.body.userTextMessage,
+            
+        }
+        var sqlInsert = 'INSERT INTO ContactUsUsers (userFirstName, userMiddleName, userLastName, userMembership, userEmail, userConfirmEmail, userTextMessage) VALUES (?,?,?,?,?,?,?)'
+        var params =[data.userFirstName, data.userMiddleName, data.userLastName, data.userMembership, data.userEmail, data.userConfirmEmail, data.userTextMessage]
+        db.run(sqlInsert, params, function (err, result) {
+            if (err){
+                res.status(400).json({"error": err.message});
+                return;         
+            
+            };
+            res.send('Send data sucessfully:  \n user first name: ' + data.userFirstName + '\n  user middle name: ' + data.userMiddleName + ' \n user last name: ' + data.userLastName + ' \n user membership: ' + data.userMembership + ' \n user Email: ' + data.userEmail + ' \n user Confirm Email: ' + data.userConfirmEmail + ' \n user text message: ' + data.userTextMessage);
+            console.log('Send data sucessfully:\n user first name: ' + data.userFirstName + '\n  user middle name: ' + data.userMiddleName + ' \n user last name: ' + data.userLastName + ' \n user membership: ' + data.userMembership + ' \n user Email: ' + data.userEmail + ' \n user Confirm Email: ' + data.userConfirmEmail + ' \n user text message: ' + data.userTextMessage);
+        });
+    });
 
-app.post("/contact", (req, res, next) => {
+    app.get('/', (req, res) => {
+       
+        res.sendFile(path.join(__dirname,'contactUsFormTest.html'));
+        //res.sendFile('contactUsFormTest.html', {root: path.join(__dirname)}); // Another way to programmatically code get path __dirname
+        console.log('Insert body-parser is completed!');
+    });
+
     
-    var errors=[]
-    if (!req.body.userFirstName){
-        errors.push("No user first name specified");
-    }
-    if (!req.body.userMiddleName){
-        errors.push("No user middle name specified");
-    }
-    if (!req.body.userLastName){
-        errors.push("No user last name specified");
-    }
-    if (!req.body.userMembership){
-        errors.push("No user membership specified");
-    }
-    if (!req.body.userEmail){
-        errors.push("No user email specified");
-    }
-    if (!req.body.userConfirmEmail){
-        errors.push("No user confirm email specified");
-    }
-    if (!req.body.userTextMessage){
-        errors.push("No user text message specified");
-    }
-    if (errors.length){
-        res.status(400).json({"error":errors.join(",")});
-        return;
-    }
-    var data = {
-        userFirstName: req.body.userFirstName,
-        userMiddleName: req.body.userMiddleName,
-        userLastName: req.body.userLastName,
-        userMembership: req.body.userMembership,
-        userEmail: req.body.userEmail,
-        userConfirmEmail: req.body.userConfirmEmail,
-        userTextMessage: req.body.userTextMessage,
-        
-    }
-    var sqlInsert = 'INSERT INTO ContactUsUsers (userFirstName, userMiddleName, userLastName, userMembership, userEmail, userConfirmEmail, userTextMessage) VALUES (?,?,?,?,?,?,?)'
-    var params =[data.userFirstName, data.userMiddleName, data.userLastName, data.userMembership, data.userEmail, data.userConfirmEmail, data.userTextMessage]
-    db.run(sqlInsert, params, function (err, result) {
-        if (err){
-            res.status(400).json({"error": err.message});
-            return;          
-        
-        };
-        res.send('Send data sucessfully: ' + data.userFirstName + ' ' + data.userMiddleName + ' ' + data.userLastName + ' ' + data.userMembership + ' ' + data.userEmail + ' ' + data.userConfirmEmail + ' ' + data.userTextMessage);
-        console.log('Send data sucessfully: ' + data.userFirstName + ' ' + data.userMiddleName + ' ' + data.userLastName + ' ' + data.userMembership + ' ' + data.userEmail + ' ' + data.userConfirmEmail + ' ' + data.userTextMessage);
-        
-        
-              
+    app.get('/contactUsFormTest.html', (req, res) => {
+        res.sendFile(path.join(__dirname + '/contactUsFormTest.html'));
     });
+    
+
+
+
+
+/*
+    // Always close the connection with database
+db.close((err) => {
+    if (err) {
+        console.error(err.message);
+    }
+    console.log('Close the database connection.');
 });
 
-
-app.get('/', (req, res) => {
-    res.sendFile('contactUsFormTest.html', {root: path.join(__dirname)});
-});
-
+*/
